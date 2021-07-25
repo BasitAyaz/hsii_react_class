@@ -7,4 +7,17 @@ function Button(props) {
     </>
   );
 }
-export default Button;
+function DarkButton(props) {
+  return (
+    <>
+      <button
+        style={{ backgroundColor: "black", color: "white" }}
+        onClick={props.myfunction}
+        className={props.myclass}
+      >
+        {props.btnValue}
+      </button>
+    </>
+  );
+}
+export { Button, DarkButton };

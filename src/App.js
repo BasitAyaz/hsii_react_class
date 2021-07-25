@@ -1,25 +1,39 @@
 import "./App.css";
 import img from "./assets/img.jpg";
 import { useState } from "react";
-import Button from "./button";
+import { Button, DarkButton } from "./button";
 
 function App() {
-  const [nam, setNam] = useState("Basit");
-  const [num, newNum] = useState(0);
-  const [email, setEmail] = useState("");
-  const [arr, setArr] = useState(["a", "b", "c"]);
+  const [text, setText] = useState("");
+  const [todoList, setTodoList] = useState([]);
 
+  function addTodo() {
+    console.log(text);
+    let arr = [...todoList, text];
+    setTodoList(arr);
+    setText("");
+  }
+  function deleteTodo(ind) {
+    todoList.splice(ind, 1);
+    setTodoList([...todoList]);
+  }
+  console.log(todoList);
   return (
     <div className="App">
       <header className="App-header">
-        <h1>{num}</h1>
-        <h2>{email}</h2>
-        <input onChange={(a) => setEmail(a.target.value)} />
-        <button onClick={() => newNum(num + 1)}>+</button>
-
-        {arr.map((e, i) => {
-          return <p key={i}>{e}</p>;
-        })}
+        <input value={text} onChange={(a) => setText(a.target.value)} />
+        <button onClick={() => addTodo()}>+</button>
+        <ul>
+          {todoList.map((e, i) => {
+            return (
+              <li key={i}>
+                {e} <button onClick={() => deleteTodo(i)}>Delete</button>
+              </li>
+            );
+          })}
+        </ul>
+        <DarkButton btnValue="Log" />
+        <Button btnValue="norman button" />
       </header>
     </div>
   );
